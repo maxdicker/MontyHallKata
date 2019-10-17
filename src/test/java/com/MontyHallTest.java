@@ -19,4 +19,14 @@ public class MontyHallTest {
         assertEquals((double)2/3*100, logger.getPercentageOfTrue(), 0);
     }
 
+    @Test
+    public void doorFactoryCreatesSpecifiedNumberOfDoors() {
+        DoorFactory factory = new DoorFactory(new RealRandom());
+
+        var doors = factory.createDoors(3);
+
+        assertEquals(3, doors.size());
+    }
+
+
 }
