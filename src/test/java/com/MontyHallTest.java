@@ -8,6 +8,7 @@ import org.junit.Test;
 public class MontyHallTest {
 
     // Bad typing of percentage. Susceptible to rounding and assertion issues.
+    // epsilon delta. maybe easier to compare ints
     @Test
     public void loggerReturnsWinPercentage() {
         ResultLogger logger = new ResultLogger();
@@ -36,7 +37,7 @@ public class MontyHallTest {
 
         int numberOfPrizes = 0;
         for (Door door : doors) {
-            if (door.hasPrize()) {
+            if (door.hasPrize) {
                 numberOfPrizes++;
             }
         }
