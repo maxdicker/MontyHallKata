@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class MontyHallTest {
 
+    // Bad typing of percentage. Susceptible to rounding and assertion issues.
     @Test
     public void loggerReturnsWinPercentage() {
         ResultLogger logger = new ResultLogger();
@@ -15,7 +16,7 @@ public class MontyHallTest {
         logger.logBoolResult(false);
         logger.logBoolResult(true);
 
-        assertEquals(2/3*100, logger.getTruePercentage());
+        assertEquals((double)2/3*100, logger.getPercentageOfTrue(), 0);
     }
 
 }
