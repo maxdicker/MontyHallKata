@@ -25,7 +25,7 @@ public class MontyHallTest {
 
         var doors = factory.createDoors(3);
 
-        assertEquals(3, doors.size());
+        assertEquals(3, doors.length);
     }
 
 
