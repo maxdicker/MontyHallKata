@@ -1,5 +1,8 @@
 package com;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DoorFactory {
     private IRandom random;
 
@@ -7,14 +10,14 @@ public class DoorFactory {
         this.random = random;
     }
 
-    public Door[] createDoors(int numberOfDoors) {
-        Door[] doors = new Door[numberOfDoors];
+    public List<Door> createDoors(int numberOfDoors) {
+        List<Door> doors = new ArrayList<>();
 
-        for (int i = 0; i < numberOfDoors; i++) {
-            doors[i] = new Door(false);
+        for (int i = 1; i <= numberOfDoors; i++) {
+            doors.add(new Door(false));
         }
 
-        doors[random.nextInt(numberOfDoors)] = new Door(true);
+        doors.set(random.nextInt(numberOfDoors), new Door(true));
 
         return doors;
     }
