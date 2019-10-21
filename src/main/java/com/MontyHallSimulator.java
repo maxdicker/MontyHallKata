@@ -19,28 +19,12 @@ public class MontyHallSimulator {
 
     public void simulateMontyHall(int numberOfGames) {
         for (int i = 1; i <= numberOfGames; i++) {
-            hostsDoors = factory.createDoors(NUMBER_OF_DOORS_FOR_MONTY_HALL);
+            Boolean playerHasPrize = scenario.determinePlayerDoorStartsWithPrize(NUMBER_OF_DOORS_FOR_MONTY_HALL);
 
-            Door playersDoor;
-            if (scenario.determinePlayerDoorStartsWithPrize(NUMBER_OF_DOORS_FOR_MONTY_HALL)) {
-                playersDoor = findPrizeDoor();
-            } else {
-                playersDoor = findEmptyDoor();
-            }
-
-            hostsDoors.remove(playersDoor);
-
-            revealEmptyDoor();
-
-            if (playerOptsToSwitchDoors) {
-                hostsDoors.add(playersDoor);
-                playersDoor = hostsDoors.get(0);
-                hostsDoors.remove(playersDoor);
-            }
-
-            if (playersDoor.hasPrize) {
+            if (playerHasPrize && !playerOptsToSwitchDoors || !playerHasPrize && playerOptsToSwitchDoors) {
                 numberOfPlayerWins++;
             }
+
         }
     }
 
