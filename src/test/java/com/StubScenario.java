@@ -8,7 +8,7 @@ public class StubScenario implements MontyHallScenario {
     }
 
     @Override
-    public Boolean playerStartsWithPrizeDoor() {
+    public Boolean determinePlayerDoorStartsWithPrize(int totalNumberOfDoors) {
         return playerStartsWithPrize;
     }
 }

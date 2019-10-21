@@ -22,7 +22,7 @@ public class MontyHallSimulator {
             hostsDoors = factory.createDoors(NUMBER_OF_DOORS_FOR_MONTY_HALL);
 
             Door playersDoor;
-            if (scenario.playerStartsWithPrizeDoor()) {
+            if (scenario.determinePlayerDoorStartsWithPrize(NUMBER_OF_DOORS_FOR_MONTY_HALL)) {
                 playersDoor = findPrizeDoor();
             } else {
                 playersDoor = findEmptyDoor();
