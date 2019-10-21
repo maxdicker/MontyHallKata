@@ -5,28 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import java.util.List;
-
 public class MontyHallTest {
-
-    @Test
-    public void doorFactoryReturnsSpecifiedNumberOfDoors() {
-        DoorFactory factory = new DoorFactory();
-
-        var doors = factory.createDoors(3);
-
-        assertEquals(3, doors.size());
-    }
-
-    @Test
-    public void doorFactoryReturnsExactlyOneDoorContainingPrize() {
-        DoorFactory factory = new DoorFactory();
-
-        var doors = factory.createDoors(5);
-        int numberOfPrizes = findNumberOfPrizes(doors);
-
-        assertEquals(1, numberOfPrizes);
-    }
 
     //Its not clear that this gives player the prize door. Need to know implementation.
     @Test
@@ -93,16 +72,6 @@ public class MontyHallTest {
         int wins = simulator.getNumberOfPlayerWins();
 
         assertTrue(wins < 390 && wins > 290);
-    }
-
-    private int findNumberOfPrizes(List<Door> doors) {
-        int numberOfPrizes = 0;
-        for (Door door : doors) {
-            if (door.hasPrize) {
-                numberOfPrizes++;
-            }
-        }
-        return numberOfPrizes;
     }
 
 }
