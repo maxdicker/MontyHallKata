@@ -12,9 +12,10 @@ public class MontyHallSimulator {
         this.playerOptsToSwitchDoors = playerOptsToSwitchDoors;
     }
 
-    public void simulateMontyHall(int numberOfGames) {
-        for (int i = 1; i <= numberOfGames; i++) {
-            Boolean playerHasPrize = scenario.determinePlayerDoorStartsWithPrize(NUMBER_OF_DOORS_FOR_MONTY_HALL);
+    public void simulateMontyHall(int numberOfSimulations) {
+        for (int i = 1; i <= numberOfSimulations; i++) {
+            scenario.constructScenario(NUMBER_OF_DOORS_FOR_MONTY_HALL);
+            Boolean playerHasPrize = scenario.playerStartsWithPrizeDoor();
 
             if (playerHasPrize && !playerOptsToSwitchDoors || !playerHasPrize && playerOptsToSwitchDoors) {
                 numberOfPlayerWins++;

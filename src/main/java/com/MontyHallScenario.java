@@ -1,5 +1,6 @@
 package com;
 
 public interface MontyHallScenario {
-    Boolean determinePlayerDoorStartsWithPrize(int totalNumberOfDoors);
+    void constructScenario(int totalNumberOfDoors);
+    Boolean playerStartsWithPrizeDoor();
 }

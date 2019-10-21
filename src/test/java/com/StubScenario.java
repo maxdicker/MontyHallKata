@@ -1,14 +1,18 @@
 package com;
 
 public class StubScenario implements MontyHallScenario {
-    private Boolean playerStartsWithPrize;
+    private Boolean playerStartsWithPrizeDoor;
 
-    public StubScenario(Boolean playerStartsWithPrize) {
-        this.playerStartsWithPrize = playerStartsWithPrize;
+    public StubScenario(Boolean playerStartsWithPrizeDoor) {
+        this.playerStartsWithPrizeDoor = playerStartsWithPrizeDoor;
     }
 
     @Override
-    public Boolean determinePlayerDoorStartsWithPrize(int totalNumberOfDoors) {
-        return playerStartsWithPrize;
+    public void constructScenario(int totalNumberOfDoors) {
+    }
+
+    @Override
+    public Boolean playerStartsWithPrizeDoor() {
+        return playerStartsWithPrizeDoor;
     }
 }
