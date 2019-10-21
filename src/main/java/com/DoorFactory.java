@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoorFactory {
-    private IRandom random;
-
-    public DoorFactory(IRandom random) {
-        this.random = random;
-    }
 
     public List<Door> createDoors(int numberOfDoors) {
         List<Door> doors = new ArrayList<>();
@@ -17,7 +12,7 @@ public class DoorFactory {
             doors.add(new Door(false));
         }
 
-        doors.set(random.nextInt(numberOfDoors), new Door(true));
+        doors.set(0, new Door(true));
 
         return doors;
     }

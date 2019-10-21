@@ -4,28 +4,38 @@ import java.util.List;
 
 public class MontyHallSimulator {
     private final int NUMBER_OF_DOORS_FOR_MONTY_HALL = 3;
+    private MontyHallScenario scenario;
     private DoorFactory factory;
     private Boolean playerOptsToSwitchDoors;
 
+    private List<Door> hostsDoors;
     private int numberOfPlayerWins;
 
-    public MontyHallSimulator(IRandom random, Boolean playerOptsToSwitchDoors) {
-        this.factory = new DoorFactory(random);
+    public MontyHallSimulator(MontyHallScenario scenario, Boolean playerOptsToSwitchDoors) {
+        this.scenario = scenario;
+        this.factory = new DoorFactory();
         this.playerOptsToSwitchDoors = playerOptsToSwitchDoors;
     }
 
     public void simulateMontyHall(int numberOfGames) {
         for (int i = 1; i <= numberOfGames; i++) {
-            List<Door> hostsDoors = factory.createDoors(NUMBER_OF_DOORS_FOR_MONTY_HALL);
+            hostsDoors = factory.createDoors(NUMBER_OF_DOORS_FOR_MONTY_HALL);
 
-            Door playersDoor = assignPlayerDoor(hostsDoors);
+            Door playersDoor;
+            if (scenario.playerStartsWithPrizeDoor()) {
+                playersDoor = findPrizeDoor();
+            } else {
+                playersDoor = findEmptyDoor();
+            }
 
-            revealEmptyDoor(hostsDoors);
+            hostsDoors.remove(playersDoor);
+
+            revealEmptyDoor();
 
             if (playerOptsToSwitchDoors) {
                 hostsDoors.add(playersDoor);
                 playersDoor = hostsDoors.get(0);
-                hostsDoors.remove(0);
+                hostsDoors.remove(playersDoor);
             }
 
             if (playersDoor.hasPrize) {
@@ -34,19 +44,22 @@ public class MontyHallSimulator {
         }
     }
 
-    private Door assignPlayerDoor(List<Door> hostsDoors) {
-        Door doorToAssign = hostsDoors.get(0);
-        hostsDoors.remove(0);
-        return doorToAssign;
+    private Door findPrizeDoor() {
+        for (Door door : hostsDoors) {
+            if (door.hasPrize) {
+                return door;
+            }
+        }
+        throw new IllegalStateException("There is no door with a prize!");
     }
 
-    private void revealEmptyDoor(List<Door> hostsDoors) {
-        Door doorToReveal = findEmptyDoorToReveal(hostsDoors);
+    private void revealEmptyDoor() {
+        Door doorToReveal = findEmptyDoor();
         hostsDoors.remove(doorToReveal);
     }
 
-    private Door findEmptyDoorToReveal(List<Door> hostDoors) {
-        for (Door door : hostDoors) {
+    private Door findEmptyDoor() {
+        for (Door door : hostsDoors) {
             if (!door.hasPrize) {
                 return door;
             }

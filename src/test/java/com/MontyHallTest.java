@@ -11,7 +11,7 @@ public class MontyHallTest {
 
     @Test
     public void doorFactoryReturnsSpecifiedNumberOfDoors() {
-        DoorFactory factory = new DoorFactory(new RealRandom());
+        DoorFactory factory = new DoorFactory();
 
         var doors = factory.createDoors(3);
 
@@ -20,7 +20,7 @@ public class MontyHallTest {
 
     @Test
     public void doorFactoryReturnsExactlyOneDoorContainingPrize() {
-        DoorFactory factory = new DoorFactory(new RealRandom());
+        DoorFactory factory = new DoorFactory();
 
         var doors = factory.createDoors(5);
         int numberOfPrizes = findNumberOfPrizes(doors);
@@ -31,7 +31,7 @@ public class MontyHallTest {
     //Its not clear that this gives player the prize door. Need to know implementation.
     @Test
     public void wherePlayerStartsWithPrizeDoor_ifSimulatingThatPlayerDoesntSwitch_PlayerShouldWinAllGames() {
-        IRandom stub = new StubRandom(0);
+        MontyHallScenario stub = new StubScenario(true);
         MontyHallSimulator simulator = new MontyHallSimulator(stub, false);
 
         simulator.simulateMontyHall(1000);
@@ -42,7 +42,7 @@ public class MontyHallTest {
 
     @Test
     public void wherePlayerStartsWithPrizeDoor_ifSimulatingThatPlayerSwitches_PlayerShouldLoseAllGames() {
-        IRandom stub = new StubRandom(0);
+        MontyHallScenario stub = new StubScenario(true);
         MontyHallSimulator simulator = new MontyHallSimulator(stub, true);
 
         simulator.simulateMontyHall(1000);
@@ -55,7 +55,7 @@ public class MontyHallTest {
 
     @Test
     public void wherePlayerDoesntStartWithPrizeDoor_ifSimulatingThatPlayerDoesntSwitch_PlayerShouldLoseAllGames() {
-        IRandom stub = new StubRandom(1);
+        MontyHallScenario stub = new StubScenario(false);
         MontyHallSimulator simulator = new MontyHallSimulator(stub, false);
 
         simulator.simulateMontyHall(1000);
@@ -66,7 +66,7 @@ public class MontyHallTest {
 
     @Test
     public void wherePlayerDoesntStartWithPrizeDoor_ifSimulatingThatPlayerSwitches_PlayerShouldWinAllGames() {
-        IRandom stub = new StubRandom(1);
+        MontyHallScenario stub = new StubScenario(false);
         MontyHallSimulator simulator = new MontyHallSimulator(stub, true);
 
         simulator.simulateMontyHall(1000);
@@ -77,7 +77,7 @@ public class MontyHallTest {
 
     @Test
     public void simulatingThatPlayerSwitchesDoors_PlayerShouldWinMostGames() {
-        MontyHallSimulator simulator = new MontyHallSimulator(new RealRandom(), true);
+        MontyHallSimulator simulator = new MontyHallSimulator(new RandomScenario(), true);
 
         simulator.simulateMontyHall(1000);
         int wins = simulator.getNumberOfPlayerWins();
@@ -87,7 +87,7 @@ public class MontyHallTest {
 
     @Test
     public void simulatingThatPlayerDoesntSwitchDoors_PlayerShouldLoseMostGames() {
-        MontyHallSimulator simulator = new MontyHallSimulator(new RealRandom(), false);
+        MontyHallSimulator simulator = new MontyHallSimulator(new RandomScenario(), false);
 
         simulator.simulateMontyHall(1000);
         int wins = simulator.getNumberOfPlayerWins();
