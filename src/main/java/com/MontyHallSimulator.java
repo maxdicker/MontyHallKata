@@ -17,7 +17,7 @@ public class MontyHallSimulator {
             scenario.constructScenario(NUMBER_OF_DOORS_FOR_MONTY_HALL);
             Boolean playerHasPrize = scenario.playerStartsWithPrizeDoor();
 
-            if (playerHasPrize && !playerOptsToSwitchDoors || !playerHasPrize && playerOptsToSwitchDoors) {
+            if (playerHasPrize ^ playerOptsToSwitchDoors) {
                 numberOfPlayerWins++;
             }
 
